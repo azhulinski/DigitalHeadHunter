@@ -1,35 +1,28 @@
 package ua.com.codegroup.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ua.com.codegroup.entity.User;
-import ua.com.codegroup.service.UserService;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 @Controller
 public class indexPageController {
 
-    @Autowired
-    UserService userService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Locale locale, Model model) {
+        locale = new Locale("en", "US");
+        Date date = new Date();
+        DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+        String formattedDate = dateFormat.format(date);
+        model.addAttribute("serverTime", formattedDate);
         return "index";
     }
 
-    @PostMapping("/saveUser")
-    public String saveUser(@RequestParam("username") String username,
-                           @RequestParam("password") String password) {
 
-        User user = new User();
-        user.setUserName(username);
-        user.setPassword(password);
-        userService.save(user);
-        return "index";
-
-    }
 
 }

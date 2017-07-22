@@ -24,12 +24,7 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource(){
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setUrl("jdbc:mysql://localhost/springmvc2015");
-//        dataSource.setUsername("root");
-//        dataSource.setPassword("root");
-//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-//        return dataSource;
+
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
         hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/hrdatabase");

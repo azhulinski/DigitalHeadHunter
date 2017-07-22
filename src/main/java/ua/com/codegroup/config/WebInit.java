@@ -12,19 +12,18 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class WebInit implements WebApplicationInitializer {
-
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         context.register(WebConfig.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
-        //DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
-        //servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy)
-        //        .addMappingForUrlPatterns(null, false, "/*");
+        /*DelegatingFilterProxy delegatingFilterProxy= new DelegatingFilterProxy();
+        servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy)
+                .addMappingForUrlPatterns(null, false, "/*");*/
 
         ServletRegistration.Dynamic registration =
                 servletContext
-                .addServlet("dispatcherServlet", dispatcherServlet);
+                        .addServlet("dispatcherServlet", dispatcherServlet);
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
         registration.setMultipartConfig(new MultipartConfigElement(
@@ -33,5 +32,6 @@ public class WebInit implements WebApplicationInitializer {
                 10000000,
                 10000000)
         );
+
     }
 }

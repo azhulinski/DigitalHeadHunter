@@ -1,16 +1,21 @@
 <%@include file="tmp/header.jsp"%>
 
 <body>
-<h1>Welcome to main page</h1>
+<h1>Welcome to index page</h1>
 
+<table>
+    <tr>
+        <td><a href="/toLogin">login page</a></td>
+    </tr>
+</table>
 <hr>
 
-<form action="/saveUser" method="post">
-    <input type="text" name="username">
-    <input type="password" name="password">
-    <input type="submit">
+<div class="footer">
 
-</form>
+    <hr>
+    time on server: ${serverTime}
+
+</div>
 
 </body>
 </html>
