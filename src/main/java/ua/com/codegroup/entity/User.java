@@ -34,9 +34,10 @@ public class User implements UserDetails {
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(authority.name().toString()));
+        authorities.add(new SimpleGrantedAuthority(authority.name()));
         return authorities;
     }
+
     public String getUsername() {
         return username;
     }
@@ -93,6 +94,10 @@ public class User implements UserDetails {
         this.authority = authority;
     }
 
+    public Authority getAuthority() {
+        return authority;
+    }
+
     public Department getDepartment() {
         return department;
     }
@@ -101,4 +106,7 @@ public class User implements UserDetails {
         this.department = department;
     }
 
+    public int getId() {
+        return id;
+    }
 }

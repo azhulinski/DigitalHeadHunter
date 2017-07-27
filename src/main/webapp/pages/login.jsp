@@ -12,5 +12,12 @@
 
 </form>
 
+<div class="footer">
+
+    <hr>
+    time on server: ${serverTime}
+
+</div>
+
 </body>
 </html>

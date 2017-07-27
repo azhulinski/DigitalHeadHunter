@@ -31,6 +31,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     public void delete(int id) {
         departmentDAO.delete(id);
+    }
 
+    public Department findDepartmentByName(String name) {
+        return departmentDAO.findDepartmentByName(name);
     }
 }

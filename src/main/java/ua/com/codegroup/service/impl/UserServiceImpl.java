@@ -12,6 +12,8 @@ import ua.com.codegroup.entity.Authority;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.service.UserService;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService{
@@ -23,17 +25,30 @@ public class UserServiceImpl implements UserService, UserDetailsService{
     private PasswordEncoder passwordEncoder;
 
     public void save(User user) {
-        user.setAuthority(Authority.ROLE_USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDAO.save(user);
     }
 
-    public User findByName(String username) {
-        return userDAO.findByUsername(username);
+    public List<User> findAll() {
+        return userDAO.findAll();
     }
 
+    public User findOne(int id) {
+        return userDAO.findOne(id);
+    }
+
+    public void delete(int id) {
+        userDAO.delete(id);
+    }
+
+    public User findByName(String username) {
+        User byUsername = userDAO.findByUsername(username);
+        System.out.println(byUsername);
+        return byUsername;
+    }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("loadUserByUsername");
         return findByName(username);
     }
 }

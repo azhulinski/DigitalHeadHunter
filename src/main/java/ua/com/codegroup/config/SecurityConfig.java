@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
+        System.out.println("DaoAuthenticationProvider");
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
@@ -44,25 +45,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .withUser("admin")
                 .password("admin")
                 .authorities("ROLE_ADMIN");
+        auth
+                .inMemoryAuthentication()
+                .withUser("jack_sparrow")
+                .password("captain")
+                .authorities("ROLE_USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/index", "/login")
+                    .antMatchers("/")
                     .permitAll()
+                    //.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .and()
                 .formLogin()
                     .loginPage("/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
-
-
+                    .permitAll()
                 .and()
                     .logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/index")
+                    .logoutSuccessUrl("/")
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .and()
                 .csrf();

@@ -24,7 +24,7 @@
         </c:forEach>
     </sf:select>
     <input type="submit">
-    <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </sf:form>
 
 </body>

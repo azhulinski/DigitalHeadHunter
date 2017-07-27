@@ -14,4 +14,6 @@ public interface DepartmentService {
 
     void delete(int id);
 
+    Department findDepartmentByName (String name);
+
 }
