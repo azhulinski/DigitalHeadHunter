@@ -31,26 +31,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider(){
-        System.out.println("DaoAuthenticationProvider");
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
+    private InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> inMemoryConfigurer() {
+        return new InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder>();
+    }
+
+    @Autowired
+    public void configureInMemory(AuthenticationManagerBuilder auth, AuthenticationProvider provider) throws Exception {
+        inMemoryConfigurer()
                 .withUser("admin")
                 .password("admin")
-                .authorities("ROLE_ADMIN");
-        auth
-                .inMemoryAuthentication()
-                .withUser("jack_sparrow")
-                .password("captain")
-                .authorities("ROLE_USER");
+                .authorities("ROLE_ADMIN")
+                .and()
+                .configure(auth);
+        auth.authenticationProvider(provider);
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -58,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                     .antMatchers("/")
                     .permitAll()
-                    //.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .and()
                 .formLogin()
                     .loginPage("/login")

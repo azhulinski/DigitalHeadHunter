@@ -19,7 +19,7 @@ public class Department {
     @Column(name = "department_id")
     private int id;
 
-    @Column(name = "name", unique = true)
+    @Column(unique = true)
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")

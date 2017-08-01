@@ -9,17 +9,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
+
     private String username;
     private String password;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
+
+    @OneToOne(mappedBy = "user")
+    private UserDetailedInfo userDetailedInfo;
 
     @Enumerated(EnumType.STRING)
     private Authority authority = Authority.ROLE_USER;
@@ -108,5 +114,13 @@ public class User implements UserDetails {
 
     public int getId() {
         return id;
+    }
+
+    public UserDetailedInfo getUserDetailedInfo() {
+        return userDetailedInfo;
+    }
+
+    public void setUserDetailedInfo(UserDetailedInfo userDetailedInfo) {
+        this.userDetailedInfo = userDetailedInfo;
     }
 }

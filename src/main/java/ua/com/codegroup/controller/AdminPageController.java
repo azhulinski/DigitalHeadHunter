@@ -1,12 +1,8 @@
 package ua.com.codegroup.controller;
 
-
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.omg.IOP.ServiceContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,18 +49,6 @@ public class AdminPageController {
     public void binder(WebDataBinder webDataBinder) {
         webDataBinder.registerCustomEditor(Department.class, departmentEditor);
     }
-
-
-    /*@PostMapping("/admin/newWorker")
-    public String newWorker(@RequestParam String username,
-                            @RequestParam String password
-    ) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        userService.save(user);
-        return "/admin/tmp/success";
-    }*/
 
     @PostMapping("/admin/newWorker")
     public String addNewWorker(@ModelAttribute ("listOfDepartments") @Validated User user, BindingResult bindingResult) {

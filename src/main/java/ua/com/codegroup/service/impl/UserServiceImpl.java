@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
         userDAO.delete(id);
     }
 
+
     public User findByName(String username) {
         User byUsername = userDAO.findByUsername(username);
         System.out.println(byUsername);
@@ -48,7 +49,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("loadUserByUsername");
         return findByName(username);
     }
 }
