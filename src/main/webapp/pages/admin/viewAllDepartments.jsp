@@ -5,10 +5,7 @@
     <table>
         <tr>
             <td>
-                <h1>${department.id}</h1>
-            </td>
-            <td>
-                <a href="${department.name}"><h1>${department.name}</h1></a>
+                <a href="${department.name}"><h2>${department.name}</h2></a>
             </td>
         </tr>
     </table>

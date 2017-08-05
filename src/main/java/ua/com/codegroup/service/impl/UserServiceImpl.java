@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.codegroup.dao.UserDAO;
-import ua.com.codegroup.entity.Authority;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.service.UserService;
 
@@ -16,7 +15,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserDAO userDAO;
@@ -43,12 +42,12 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
 
     public User findByName(String username) {
-        User byUsername = userDAO.findByUsername(username);
-        System.out.println(byUsername);
-        return byUsername;
+        User user = userDAO.findByUsername(username);
+        return user;
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByName(username);
     }
+
 }

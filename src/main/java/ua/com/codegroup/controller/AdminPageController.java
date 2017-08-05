@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
+
 public class AdminPageController {
 
     @Autowired
@@ -34,7 +35,7 @@ public class AdminPageController {
     @GetMapping("/admin/main")
     public String mainAdminPage() {
 
-        return "admin/main";
+        return "/admin/main";
     }
 
     @GetMapping("/admin/newWorker")
@@ -42,10 +43,10 @@ public class AdminPageController {
         model.addAttribute("listOfDepartments", new User());
         model.addAttribute("departments", departmentService.findAll());
 
-        return "admin/newWorker";
+        return "/admin/newWorker";
     }
 
-    @InitBinder("listOfDepartments")
+    @InitBinder("/admin/listOfDepartments")
     public void binder(WebDataBinder webDataBinder) {
         webDataBinder.registerCustomEditor(Department.class, departmentEditor);
     }
@@ -54,7 +55,7 @@ public class AdminPageController {
     public String addNewWorker(@ModelAttribute ("listOfDepartments") @Validated User user, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
-            return "admin/newWorker";
+            return "/admin/newWorker";
         }
 
         userService.save(user);

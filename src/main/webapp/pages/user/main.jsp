@@ -3,9 +3,28 @@
 
 <table>
     <tr>
-        <td><a href="/user/adduserdetails">add Your details</a></td>
+        <td>
+            <a href="/user/${user.username}">view your details</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="/user/editUserDetails">edit details</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="/logout">logout</a>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </td>
     </tr>
 </table>
+
+<div class="footer">
+    <hr>
+
+
+</div>
 
 </body>
 </html>

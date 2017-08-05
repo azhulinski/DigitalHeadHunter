@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.codegroup.dao.UserDetailedInfoDAO;
+import ua.com.codegroup.entity.User;
 import ua.com.codegroup.entity.UserDetailedInfo;
 import ua.com.codegroup.service.UserDetailedInfoService;
 
@@ -17,4 +18,9 @@ public class UserDetailedInfoServiceImpl implements UserDetailedInfoService {
     public void save(UserDetailedInfo userDetailedInfo) {
         userDetailedInfoDAO.save(userDetailedInfo);
     }
+
+    public UserDetailedInfo findByUserId(int id) {
+        return userDetailedInfoDAO.findOne(id);
+    }
+
 }

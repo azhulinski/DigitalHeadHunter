@@ -2,9 +2,15 @@
 <%@include file="tmp/header.jsp" %>
 
 <body>
+<h3>${userName}</h3>
 
-<form action="/user/adduserdetails" method="post">
+<form action="/user/editUserDetails" method="post">
     <table>
+        <tr>
+            <td>
+                <input type="hidden" value="${id}" name="user">
+            </td>
+        </tr>
         <tr>
             <td><input type="text" name="firstName"></td>
             <td>first name</td>
@@ -23,6 +29,7 @@
                 <fmt:formatDate value="${UserDetailedInfo.dateOfBirth}" var="dateString" pattern="dd.mm.yyyy"/>
 
                 <input type="text" path="dateOfBirth" value="${dateString}" id="datepicker" name="dateOfBirth">
+
             </td>
             <td>date of birth</td>
         </tr>
@@ -35,7 +42,7 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" value="gender" name="gender">
+                <input type="checkbox" name="married" checked>
             </td>
             <td>
                 married
@@ -43,7 +50,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="update info"></td>
+            <td><input type="submit" value="save info"></td>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </tr>
     </table>

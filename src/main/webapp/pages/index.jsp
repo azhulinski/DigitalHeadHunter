@@ -5,23 +5,43 @@
 <h1>Welcome to index page</h1>
 
 <table>
+    <sec:authorize access="isAnonymous()">
     <tr>
-        <td><a href="/toLogin">login page</a></td>
-
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <td><a href="admin/main">admin page</a></td>
-            <td><a href="admin/viewAllDepartments">view all departments</a></td>
-        </sec:authorize>
-
         <td>
-            <sec:authorize access="hasRole('ROLE_USER')">
-                <a href="user/main">view user details</a>
-            </sec:authorize>
+            <a href="/toLogin">login page</a>
         </td>
     </tr>
+    </sec:authorize>
 
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <tr>
+            <td><a href="admin/main">admin page</a></td>
+        <tr/>
+        <tr>
+            <td><a href="admin/viewAllDepartments">view all departments</a></td>
+        </tr>
+    </sec:authorize>
+
+
+    <sec:authorize access="hasRole('ROLE_USER')">
+        <tr>
+            <td>
+                <a href="user/main">user main page</a>
+            </td>
+
+        </tr>
+    </sec:authorize>
+
+    <sec:authorize access="isAuthenticated()">
+        <tr>
+            <td>
+                <a href="/logout">logout</a>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </td>
+        </tr>
+    </sec:authorize>
 </table>
-<hr>
+
 
 <div class="footer">
 
