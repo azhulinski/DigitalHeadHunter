@@ -75,9 +75,13 @@ public class UserPageController {
     }
     @GetMapping("/user/{name}")
     public String viewUserDetails(@PathVariable("name") String name, Model model, Principal principal) {
+        User user = userService.findByName(principal.getName());
 
-        model.addAttribute("name", principal.getName());
+        model.addAttribute("user", user);
+        System.out.println(user.getId());
 
+        /*UserDetailedInfo userDetailedInfo = userDetailedInfoService.findByUserId(user.getId());
+        System.out.println(userDetailedInfo);*/
 
         return "user/viewUserDetails";
     }

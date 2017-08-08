@@ -19,8 +19,5 @@ public class UserDetailedInfoServiceImpl implements UserDetailedInfoService {
         userDetailedInfoDAO.save(userDetailedInfo);
     }
 
-    public UserDetailedInfo findByUserId(int id) {
-        return userDetailedInfoDAO.findOne(id);
-    }
 
 }
