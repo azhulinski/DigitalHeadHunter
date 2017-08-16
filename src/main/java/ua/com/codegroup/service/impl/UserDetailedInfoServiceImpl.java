@@ -19,5 +19,10 @@ public class UserDetailedInfoServiceImpl implements UserDetailedInfoService {
         userDetailedInfoDAO.save(userDetailedInfo);
     }
 
+    @Override
+    public UserDetailedInfo findDetailsByUserId(int id) {
+        return userDetailedInfoDAO.findDetailsByUserId(id);
+    }
+
 
 }

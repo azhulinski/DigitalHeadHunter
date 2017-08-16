@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-
 public class AdminPageController {
 
     @Autowired
@@ -40,22 +39,25 @@ public class AdminPageController {
 
     @GetMapping("/admin/newWorker")
     public String addNewWorker(Model model) {
-        model.addAttribute("listOfDepartments", new User());
+        model.addAttribute("saveNewUser", new User());
         model.addAttribute("departments", departmentService.findAll());
 
         return "/admin/newWorker";
     }
 
-    @InitBinder("/admin/listOfDepartments")
+    @InitBinder
     public void binder(WebDataBinder webDataBinder) {
         webDataBinder.registerCustomEditor(Department.class, departmentEditor);
     }
 
     @PostMapping("/admin/newWorker")
-    public String addNewWorker(@ModelAttribute ("listOfDepartments") @Validated User user, BindingResult bindingResult) {
+    public String addNewWorker(@Validated User user, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
+
+            System.out.println(bindingResult.getAllErrors().toString());
             return "/admin/newWorker";
+
         }
 
         userService.save(user);

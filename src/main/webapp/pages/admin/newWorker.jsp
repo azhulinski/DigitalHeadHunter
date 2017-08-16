@@ -1,7 +1,8 @@
 <%@include file="tmp/header.jsp"%>
 <body>
 
-<sf:form action="/admin/newWorker" method="post" modelAttribute="listOfDepartments">
+
+<sf:form action="/admin/newWorker" method="post" modelAttribute="saveNewUser">
     <sf:input path="username"/>
     <sf:input path="password"/>
     <sf:select path="department">

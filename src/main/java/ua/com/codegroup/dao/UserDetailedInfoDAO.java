@@ -7,6 +7,8 @@ import ua.com.codegroup.entity.UserDetailedInfo;
 
 public interface UserDetailedInfoDAO extends JpaRepository<UserDetailedInfo, Integer> {
 
+    @Query("select d from UserDetailedInfo d join fetch d.user where d.user.id=:id")
+    UserDetailedInfo findDetailsByUserId(@Param("id") int id);
 
 
 }

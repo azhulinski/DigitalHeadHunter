@@ -19,6 +19,17 @@
         </td>
     </tr>
 </table>
+<hr>
+<form>
+    <tr>
+    <input type="button" value="start work" onclick="startStop(this)" name="">
+    <script>
+        function startStop(input) {
+            input.value = input.value != 'stop work' ? 'stop work' : 'start work'
+        }
+    </script>
+    </tr>
+</form>
 
 <div class="footer">
     <hr>

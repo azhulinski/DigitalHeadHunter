@@ -13,7 +13,7 @@ import java.util.Collection;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int id;
 
@@ -24,7 +24,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserDetailedInfo userDetailedInfo;
 
     @Enumerated(EnumType.STRING)

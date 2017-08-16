@@ -46,8 +46,17 @@ public class UserPageController {
     public String editUserDetails(Model model, Principal principal) {
 
         User user = userService.findByName(principal.getName());
+        UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
         model.addAttribute("userName", principal.getName());
-        model.addAttribute("id", user.getId());
+        model.addAttribute("userId", user.getId());
+
+
+        if (userDetailedInfo != null) {
+            model.addAttribute("detailedInfoId", userDetailedInfo.getId());
+            model.addAttribute("firstName", userDetailedInfo.getFirstName());
+            model.addAttribute("lastName", userDetailedInfo.getLastName());
+            return "/user/editUserDetails";
+        }
 
         return "/user/editUserDetails";
     }
@@ -62,29 +71,107 @@ public class UserPageController {
     }
 
     @PostMapping("/user/editUserDetails")
-    public String editUserDetails(@Validated UserDetailedInfo userDetailedInfo,
-                                  BindingResult bindingResult) {
+    public String editUserDetails(@RequestParam String firstName,
+                                  @RequestParam String lastName,
+                                  @RequestParam Date dateOfBirth,
+                                  @RequestParam String gender,
+                                  @RequestParam Boolean married,
+                                  @Validated UserDetailedInfo userDetailedInfo,
+                                  BindingResult bindingResult,
+                                  Principal principal) {
 
+        User user = userService.findByName(principal.getName());
+        UserDetailedInfo detailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
+
+        if (detailedInfo != null) {
+            int detailedInfoId = detailedInfo.getId();
+            detailedInfo
+                    .builder()
+                    .id(detailedInfoId)
+                    .firstName(firstName)
+                    .lastName(lastName)
+                    .dateOfBirth(dateOfBirth)
+                    .gender(gender)
+                    .married(Boolean.valueOf(married))
+                    .build();
+            userDetailedInfoService.save(userDetailedInfo);
+            return "/user/tmp/success";
+        }
 
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors().toString());
             return "/user/editUserDetails";
         }
 
         userDetailedInfoService.save(userDetailedInfo);
+        System.out.println(userDetailedInfo.isMarried());
         return "/user/tmp/success";
     }
+
     @GetMapping("/user/{name}")
     public String viewUserDetails(@PathVariable("name") String name, Model model, Principal principal) {
         User user = userService.findByName(principal.getName());
 
-        model.addAttribute("user", user);
-        System.out.println(user.getId());
+        UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
+        if (userDetailedInfo != null) {
+            model.addAttribute("user", user);
 
-        /*UserDetailedInfo userDetailedInfo = userDetailedInfoService.findByUserId(user.getId());
-        System.out.println(userDetailedInfo);*/
+            Date date = userDetailedInfo.getDateOfBirth();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("DD-MM-YYYY");
+            String outputDate = simpleDateFormat.format(date);
 
-        return "user/viewUserDetails";
+            model.addAttribute("firstName", userDetailedInfo.getFirstName());
+            model.addAttribute("lastName", userDetailedInfo.getLastName());
+            model.addAttribute("dateOfBirth", outputDate);
+            model.addAttribute("gender", userDetailedInfo.getGender());
+            model.addAttribute("married", userDetailedInfo.isMarried());
+
+            return "user/viewUserDetails";
+        } else {
+
+            return "redirect:user/editUserDetails";
+        }
+
     }
+
+    /*@GetMapping("/user/updateInfo")
+    public String updateInfo(Model model, Principal principal) {
+        User user = userService.findByName(principal.getName());
+        model.addAttribute("userName", user.getUsername());
+        return "/user/updateInfo";
+    }
+
+    @PostMapping
+    public String updateInfo(@RequestParam String firstName,
+                             @RequestParam String lastName,
+                             @RequestParam Date dateOfBirth,
+                             @RequestParam String gender,
+                             @RequestParam Boolean married,
+                             Model model,
+                             Principal principal) {
+        User user = userService.findByName(principal.getName());
+        UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
+
+        model.addAttribute("user", user);
+
+        model.addAttribute("firstName", userDetailedInfo.getFirstName());
+        model.addAttribute("lastName", userDetailedInfo.getLastName());
+        System.out.println(userDetailedInfo.isMarried());
+
+        System.out.println(married);
+
+        userDetailedInfo
+                .builder()
+                .id(userDetailedInfo.getId())
+                .firstName(firstName)
+                .lastName(lastName)
+                .dateOfBirth(dateOfBirth)
+                .gender(gender)
+                .married(Boolean.valueOf(married))
+                .build();
+        userDetailedInfoService.save(userDetailedInfo);
+        return "/user/tmp/success";
+    }*/
 
     @GetMapping("/user/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {

@@ -9,4 +9,6 @@ public interface UserDetailedInfoService {
 
     void save(UserDetailedInfo userDetailedInfo);
 
+    UserDetailedInfo findDetailsByUserId (int id);
+
 }
