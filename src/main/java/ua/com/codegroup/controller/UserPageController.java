@@ -66,19 +66,20 @@ public class UserPageController {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.mm.yyyy");
         simpleDateFormat.setLenient(true);
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(simpleDateFormat, true));
+
         webDataBinder.registerCustomEditor(User.class, userEditor);
 
     }
 
     @PostMapping("/user/editUserDetails")
-    public String editUserDetails(@RequestParam String firstName,
+    public String editUserDetails(@Validated UserDetailedInfo userDetailedInfo,
+                                  BindingResult bindingResult,
+                                  Principal principal,
+                                  @RequestParam String firstName,
                                   @RequestParam String lastName,
                                   @RequestParam Date dateOfBirth,
                                   @RequestParam String gender,
-                                  @RequestParam Boolean married,
-                                  @Validated UserDetailedInfo userDetailedInfo,
-                                  BindingResult bindingResult,
-                                  Principal principal) {
+                                  @RequestParam Boolean married) {
 
         User user = userService.findByName(principal.getName());
         UserDetailedInfo detailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
@@ -94,7 +95,7 @@ public class UserPageController {
                     .gender(gender)
                     .married(Boolean.valueOf(married))
                     .build();
-            userDetailedInfoService.save(userDetailedInfo);
+            userDetailedInfoService.save(detailedInfo);
             return "/user/tmp/success";
         }
 
@@ -113,6 +114,7 @@ public class UserPageController {
         User user = userService.findByName(principal.getName());
 
         UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
+
         if (userDetailedInfo != null) {
             model.addAttribute("user", user);
 
@@ -129,49 +131,10 @@ public class UserPageController {
             return "user/viewUserDetails";
         } else {
 
-            return "redirect:user/editUserDetails";
+            return "redirect:/user/editUserDetails";
         }
 
     }
-
-    /*@GetMapping("/user/updateInfo")
-    public String updateInfo(Model model, Principal principal) {
-        User user = userService.findByName(principal.getName());
-        model.addAttribute("userName", user.getUsername());
-        return "/user/updateInfo";
-    }
-
-    @PostMapping
-    public String updateInfo(@RequestParam String firstName,
-                             @RequestParam String lastName,
-                             @RequestParam Date dateOfBirth,
-                             @RequestParam String gender,
-                             @RequestParam Boolean married,
-                             Model model,
-                             Principal principal) {
-        User user = userService.findByName(principal.getName());
-        UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
-
-        model.addAttribute("user", user);
-
-        model.addAttribute("firstName", userDetailedInfo.getFirstName());
-        model.addAttribute("lastName", userDetailedInfo.getLastName());
-        System.out.println(userDetailedInfo.isMarried());
-
-        System.out.println(married);
-
-        userDetailedInfo
-                .builder()
-                .id(userDetailedInfo.getId())
-                .firstName(firstName)
-                .lastName(lastName)
-                .dateOfBirth(dateOfBirth)
-                .gender(gender)
-                .married(Boolean.valueOf(married))
-                .build();
-        userDetailedInfoService.save(userDetailedInfo);
-        return "/user/tmp/success";
-    }*/
 
     @GetMapping("/user/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {

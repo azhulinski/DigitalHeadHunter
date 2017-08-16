@@ -38,7 +38,7 @@
     <tr>
         <td>
 
-                <a href="/user/updateInfo/"><input type="button" value="update info"></a>
+                <a href="/user/editUserDetails/"><input type="button" value="update info"></a>
                 <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
 
         </td>
