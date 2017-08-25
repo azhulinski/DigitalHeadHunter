@@ -9,7 +9,7 @@
     </tr>
     <tr>
         <td>
-            <a href="/user/editUserDetails">edit details</a>
+            <a href="/user/addUserDetails">edit details</a>
         </td>
     </tr>
     <tr>

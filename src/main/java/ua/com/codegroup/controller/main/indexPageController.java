@@ -1,4 +1,4 @@
-package ua.com.codegroup.controller;
+package ua.com.codegroup.controller.main;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

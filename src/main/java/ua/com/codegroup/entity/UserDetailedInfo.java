@@ -2,6 +2,7 @@ package ua.com.codegroup.entity;
 
 
 import lombok.*;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -10,8 +11,8 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 
 public class UserDetailedInfo {
@@ -22,7 +23,7 @@ public class UserDetailedInfo {
     private String firstName;
     private String lastName;
 
-    @DateTimeFormat(pattern = "dd.mm.yyyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateOfBirth;
     private String gender;
     private boolean married;

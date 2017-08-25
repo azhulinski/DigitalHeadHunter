@@ -1,10 +1,10 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="tmp/header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <body>
 <h3>${userName}</h3>
 
-<form action="/user/editUserDetails" method="post">
+<form action="/user/addUserDetails" method="post" modelAttribute="addUserInfo">
     <table>
         <tr>
             <td>
@@ -12,23 +12,24 @@
             </td>
         </tr>
         <tr>
-            <td><input type="text" value="${firstName}" onclick="this.value='';" name="firstName"></td>
+            <td><input type="text" placeholder="first name" name="firstName"></td>
             <td>first name</td>
         </tr>
         <tr>
-            <td><input type="text" value="${lastName}" onclick="this.value='';" name="lastName"></td>
+            <td><input type="text" placeholder="last name" name="lastName"></td>
             <td>last name</td>
         </tr>
         <tr>
             <td>
-                <script>
+                <%--<script>
                     $(function () {
-                        $("#datepicker").datepicker({dateFormat: 'dd.mm.yy', changeMonth: true, changeYear: true});
-                    });
-                </script>
-                <fmt:formatDate value="${UserDetailedInfo.dateOfBirth}" var="dateString" pattern="dd.mm.yyyy"/>
+                        $("#datepicker").datepicker({dateFormat: 'MM-dd-yy', changeMonth: true, changeYear: true});
+                    }); id="datepicker"
+                </script>--%>
+                <fmt:formatDate value="${UserDetailedInfo.dateOfBirth}"
+                                var="dateString"/>
 
-                <input type="text" path="dateOfBirth" value="${dateString}" id="datepicker" name="dateOfBirth">
+                <input type="date" path="dateOfBirth" value="${dateString}" name="dateOfBirth">
 
             </td>
             <td>date of birth</td>

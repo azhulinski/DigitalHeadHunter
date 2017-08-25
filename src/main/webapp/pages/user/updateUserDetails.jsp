@@ -1,34 +1,34 @@
 <%@include file="tmp/header.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
 
 <body>
 <h3>${userName}</h3>
-
-<form action="/user/updateInfo" method="post">
+<form action="/user/updateUserDetails/" method="post" modelAttribute="userDetailedInfo">
     <table>
         <tr>
             <td>
-                <input type="hidden" value="${id}" name="user">
+                <input type="hidden" value="${detailedInfoId}" name="detailedInfoId">
             </td>
         </tr>
         <tr>
-            <td><input type="text" value="${firstName}" onclick="this.value='';" name="firstName"></td>
+            <td><input type="text" placeholder="${firstName}" name="firstName"></td>
 
         </tr>
         <tr>
-            <td><input type="text" value="${lastName}" onclick="this.value='';" name="lastName"></td>
+            <td><input type="text" placeholder="${lastName}" name="lastName"></td>
 
         </tr>
         <tr>
             <td>
-                <script>
+                <%--<script>
                     $(function () {
-                        $("#datepicker").datepicker({dateFormat: 'dd.mm.yy', changeMonth: true, changeYear: true});
+                        $("#datepicker").datepicker({dateFormat: 'mm-dd-yy', changeMonth: true, changeYear: true});
                     });
                 </script>
-                <fmt:formatDate value="${UserDetailedInfo.dateOfBirth}" var="dateString" pattern="dd.mm.yyyy"/>
+                <fmt:formatDate type="both" value="${dateOfBirth}" var="dateString"/>--%>
 
-                <input type="text" path="dateOfBirth" value="${dateString}" id="datepicker" name="dateOfBirth">
+                <input type="date" path="dateOfBirth" placeholder="dateOfBirth" name="dateOfBirth">
 
             </td>
         </tr>
@@ -41,7 +41,8 @@
         </tr>
         <tr>
             <td>
-                <input type="checkbox" name="married" checked>
+                <input type="hidden" value='0' name="married">
+                <input type="checkbox" value='1' name="married">
             </td>
             <td>
                 married

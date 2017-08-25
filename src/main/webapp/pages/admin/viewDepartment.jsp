@@ -5,7 +5,7 @@
 <h3>${department.name}</h3>
 <ul>
     <c:forEach items="${department.user}" var="user">
-        <li>${user.username}</li>
+        <li><a href="/user/${user.username}">${user.username}</a></li>
     </c:forEach>
 </ul>
 <table>

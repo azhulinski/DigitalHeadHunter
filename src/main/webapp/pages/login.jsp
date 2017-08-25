@@ -3,8 +3,8 @@
 <body>
 
 <form action="/login" method="post">
-    <input type="text" value="username" onclick="this.value='';" name="username">
-    <input type="text" value="password" onclick="this.value='';" name="password" >
+    <input type="text" placeholder="username" name="username">
+    <input type="password" placeholder="password" name="password" >
 
     <input type="submit">
 
