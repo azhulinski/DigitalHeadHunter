@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -34,6 +35,8 @@ public class User implements UserDetails {
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
+
+    private boolean isPasswordDefault = false;
 
     public User() {
     }
@@ -123,4 +126,13 @@ public class User implements UserDetails {
     public void setUserDetailedInfo(UserDetailedInfo userDetailedInfo) {
         this.userDetailedInfo = userDetailedInfo;
     }
+
+    public boolean isPasswordDefault() {
+        return isPasswordDefault;
+    }
+
+    public void setPasswordDefault(boolean passwordDefault) {
+        isPasswordDefault = passwordDefault;
+    }
+
 }

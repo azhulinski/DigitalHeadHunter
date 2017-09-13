@@ -39,6 +39,7 @@ public class AdminMainPageController {
         return "/admin/viewDepartment";
     }
 
+
     @GetMapping("/admin/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         authentication = SecurityContextHolder.getContext().getAuthentication();

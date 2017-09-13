@@ -4,7 +4,7 @@
 <table>
     <tr>
         <td>
-            <a href="/user/${user.username}">view your details</a>
+            <a href="/user/${user}">view your details</a>
         </td>
     </tr>
     <tr>
@@ -20,16 +20,7 @@
     </tr>
 </table>
 <hr>
-<form>
-    <tr>
-    <input type="button" value="start work" onclick="startStop(this)" name="">
-    <script>
-        function startStop(input) {
-            input.value = input.value != 'stop work' ? 'stop work' : 'start work'
-        }
-    </script>
-    </tr>
-</form>
+
 
 <div class="footer">
     <hr>

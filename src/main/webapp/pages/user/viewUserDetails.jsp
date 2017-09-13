@@ -35,15 +35,33 @@
             </td>
         </s:if>
     </tr>
-    <tr>
-        <td>
 
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <tr>
+            <td>
+                <a href="/admin/${user.username}-changeAuthorities"><input type="button" value="change authorities"></a>
+            </td>
+        <tr/>
+        <tr>
+            <td>
+                <form action="/admin/resetPassword" method="post">
+                <input type="hidden" value="${user.id}" name="userId">
+                    <input type="submit" name="" value="reset password">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </td>
+        </tr>
+    </sec:authorize>
+
+    <sec:authorize access="hasRole('ROLE_USER')">
+        <tr>
+            <td>
                 <a href="/user/updateUserDetails"><input type="button" value="update info"></a>
-                <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+            </td>
+        </tr>
+    </sec:authorize>
 
-        </td>
 
-    </tr>
 </table>
 
 </body>

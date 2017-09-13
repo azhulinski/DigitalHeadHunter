@@ -40,6 +40,7 @@ public class AddUserDetailsController {
     public String addUserDetails(Model model, Principal principal) {
 
         User user = userService.findByName(principal.getName());
+
         UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
 
         if (userDetailedInfo == null) {
@@ -68,9 +69,7 @@ public class AddUserDetailsController {
 
     @PostMapping("/user/addUserDetails")
     public String addUserDetails(@ModelAttribute("addUserInfo") @Validated UserDetailedInfo userDetailedInfo,
-                                 BindingResult bindingResult, @RequestParam("dateOfBirth") String dateOfBirth) {
-        System.out.println(userDetailedInfo.getDateOfBirth());
-        System.out.println(dateOfBirth);
+                                 BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors().toString());

@@ -24,8 +24,11 @@ public class ViewUserDetailsController {
     UserDetailedInfoService userDetailedInfoService;
 
     @GetMapping("/user/{name}")
-    public String viewUserDetails(@PathVariable("name") String name, Model model, Principal principal) {
-        User user = userService.findByName(principal.getName());
+    public String viewUserDetails(@PathVariable("name") String name, Model model) {
+        User user = userService.findByName(name);
+
+        System.out.println(name);
+
 
         UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
 
