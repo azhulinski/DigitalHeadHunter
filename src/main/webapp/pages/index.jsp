@@ -22,6 +22,15 @@
         </tr>
     </sec:authorize>
 
+    <sec:authorize access="hasRole('ROLE_MANAGER')">
+        <tr>
+            <td>
+                <a href="depmanager/main">manager main page</a>
+            </td>
+
+        </tr>
+    </sec:authorize>
+
 
     <sec:authorize access="hasRole('ROLE_USER')">
         <tr>

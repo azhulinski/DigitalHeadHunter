@@ -21,6 +21,7 @@ public class UserMainController {
         User user = userService.findByName(principal.getName());
 
         if (user.isPasswordDefault()) {
+            model.addAttribute("userId", user.getId());
             return "/user/changePassword";
 
         } else {

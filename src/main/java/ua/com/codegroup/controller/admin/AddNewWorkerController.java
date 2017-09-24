@@ -44,9 +44,8 @@ public class AddNewWorkerController {
     @PostMapping("/admin/newWorker")
     public String addNewWorker(@Validated User user, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
 
-            System.out.println(bindingResult.getAllErrors().toString());
             return "/admin/newWorker";
 
         }

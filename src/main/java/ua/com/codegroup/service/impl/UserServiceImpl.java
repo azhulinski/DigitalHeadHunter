@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDAO.delete(id);
     }
 
-
     public User findByName(String username) {
         User user = userDAO.findByUsername(username);
         return user;
