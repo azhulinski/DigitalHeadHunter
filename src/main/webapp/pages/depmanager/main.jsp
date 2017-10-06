@@ -5,9 +5,13 @@
 
     <tr>
         <td>
-            <a href="/depmanager/allUsers">view users in department</a>
+            <a href="/depmanager/viewAllDepartments">view departments</a>
+        </td>
+        <td>
+            <a href="/depmanager/listOfAllUsers">give task to user</a>
         </td>
     </tr>
+
 
     <sec:authorize access="isAuthenticated()">
         <tr>

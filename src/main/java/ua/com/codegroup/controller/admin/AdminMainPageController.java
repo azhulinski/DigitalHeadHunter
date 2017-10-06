@@ -13,6 +13,7 @@ import ua.com.codegroup.service.DepartmentService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class AdminMainPageController {
@@ -35,10 +36,10 @@ public class AdminMainPageController {
     @GetMapping("/admin/{name}")
     public String showDepartment(@PathVariable("name") String name, Model model) {
         Department one = departmentService.findDepartmentByName(name);
+
         model.addAttribute("department", one);
         return "/admin/viewDepartment";
     }
-
 
     @GetMapping("/admin/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {

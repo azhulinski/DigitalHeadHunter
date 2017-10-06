@@ -2,6 +2,7 @@ package ua.com.codegroup.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.com.codegroup.dao.DepartmentDAO;
 import ua.com.codegroup.entity.Department;
 import ua.com.codegroup.service.DepartmentService;
@@ -9,6 +10,7 @@ import ua.com.codegroup.service.DepartmentService;
 import java.util.List;
 
 @Service
+@Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
 
@@ -36,4 +38,5 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department findDepartmentByName(String name) {
         return departmentDAO.findDepartmentByName(name);
     }
+
 }

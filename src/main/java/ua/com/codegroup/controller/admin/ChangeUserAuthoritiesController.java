@@ -11,6 +11,8 @@ import ua.com.codegroup.entity.Authority;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.service.UserService;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ChangeUserAuthoritiesController {
 
@@ -30,7 +32,9 @@ public class ChangeUserAuthoritiesController {
     }
 
     @PostMapping("/admin/ChangeUserAuthorities")
-    public String changeUserAuthorities(@RequestParam int userId, @RequestParam Authority authority) {
+    public String changeUserAuthorities(@RequestParam int userId,
+                                        @RequestParam Authority authority
+                                        ) {
         User user = userService.findOne(userId);
 
         user.setAuthority(authority);
@@ -38,7 +42,6 @@ public class ChangeUserAuthoritiesController {
         userService.save(user);
 
         return "redirect:/";
-
 
     }
 

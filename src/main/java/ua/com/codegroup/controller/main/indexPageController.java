@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -28,12 +29,15 @@ public class indexPageController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response,
+                         Authentication authentication,
+                         HttpSession session) {
         authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
-
+        session.invalidate();
         return "/";
     }
 

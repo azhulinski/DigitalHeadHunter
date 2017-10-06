@@ -53,7 +53,6 @@ public class AddUserDetailsController {
             return "redirect:/user/updateUserDetails";
         }
 
-
     }
 
     @InitBinder

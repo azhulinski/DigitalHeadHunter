@@ -3,7 +3,7 @@
 
 <h2>saved successfully</h2>
 
-<meta http-equiv="refresh" content="2;/user/main/">
+<meta http-equiv="refresh" content="2;/depmanager/main/">
 
 </body>
 </html>

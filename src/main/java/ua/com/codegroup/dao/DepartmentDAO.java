@@ -9,5 +9,4 @@ public interface DepartmentDAO extends JpaRepository<Department, Integer> {
 
     @Query("select d from Department d join fetch d.user where d.name =:name")
     Department findDepartmentByName(@Param("name") String name);
-
 }

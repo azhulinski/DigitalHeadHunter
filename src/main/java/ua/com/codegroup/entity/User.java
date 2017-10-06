@@ -1,5 +1,6 @@
 package ua.com.codegroup.entity;
 
+import org.hibernate.engine.profile.Fetch;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,6 +28,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserDetailedInfo userDetailedInfo;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<UserTaskToDo> userTaskToDo;
 
     @Enumerated(EnumType.STRING)
     private Authority authority = Authority.ROLE_USER;

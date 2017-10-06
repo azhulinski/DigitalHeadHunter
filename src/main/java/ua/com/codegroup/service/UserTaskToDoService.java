@@ -14,6 +14,6 @@ public interface UserTaskToDoService {
 
     UserTaskToDo findOne(int id);
 
-    UserTaskToDo findTakByUserId(int id);
+    List<UserTaskToDo> findTaskByUserId(int id);
 
 }

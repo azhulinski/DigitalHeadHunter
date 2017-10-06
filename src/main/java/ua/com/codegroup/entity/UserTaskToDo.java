@@ -26,7 +26,7 @@ public class UserTaskToDo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
