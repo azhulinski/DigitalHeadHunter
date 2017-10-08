@@ -1,5 +1,6 @@
 package ua.com.codegroup.controller.manager;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import ua.com.codegroup.entity.UserTaskToDo;
 import ua.com.codegroup.service.DepartmentService;
 import ua.com.codegroup.service.UserService;
 import ua.com.codegroup.service.UserTaskToDoService;
+
+import java.util.Date;
 
 @Controller
 public class addNewTaskController {
@@ -50,15 +53,21 @@ public class addNewTaskController {
     @PostMapping("/depmanager/addTask")
     public String addTaskToUser(@RequestParam String taskName,
                                 @RequestParam String taskBody,
+                                @RequestParam String endDate,
                                 @RequestParam int id) {
 
         User user = userService.findOne(id);
 
         UserTaskToDo task = new UserTaskToDo();
 
+        LocalDate localDate = LocalDate.parse(endDate);
+        Date expireDate = localDate.toDate();
+
         task.setTaskName(taskName);
         task.setTaskBody(taskBody);
+        task.setEndDate(expireDate);
         task.setCompleted(false);
+        task.setConfirmed(false);
         task.setUser(user);
 
         userTaskToDoService.save(task);

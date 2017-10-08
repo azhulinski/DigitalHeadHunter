@@ -1,6 +1,5 @@
 package ua.com.codegroup.entity;
 
-import org.hibernate.engine.profile.Fetch;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +28,7 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserDetailedInfo userDetailedInfo;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL    )
     private List<UserTaskToDo> userTaskToDo;
 
     @Enumerated(EnumType.STRING)
@@ -139,4 +138,11 @@ public class User implements UserDetails {
         isPasswordDefault = passwordDefault;
     }
 
+    public List<UserTaskToDo> getUserTaskToDo() {
+        return userTaskToDo;
+    }
+
+    public void setUserTaskToDo(List<UserTaskToDo> userTaskToDo) {
+        this.userTaskToDo = userTaskToDo;
+    }
 }

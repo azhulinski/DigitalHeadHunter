@@ -1,6 +1,9 @@
 package ua.com.codegroup.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +14,8 @@ import ua.com.codegroup.entity.Authority;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.service.UserService;
 
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ChangeUserAuthoritiesController {
@@ -33,14 +37,15 @@ public class ChangeUserAuthoritiesController {
 
     @PostMapping("/admin/ChangeUserAuthorities")
     public String changeUserAuthorities(@RequestParam int userId,
-                                        @RequestParam Authority authority
-                                        ) {
-        User user = userService.findOne(userId);
+                                        @RequestParam Authority authority) {
+
+        /*User user = userService.findOne(userId);
 
         user.setAuthority(authority);
 
-        userService.save(user);
+        userService.save(user);*/
 
+        userService.updateAuthority(userId, authority);
         return "redirect:/";
 
     }

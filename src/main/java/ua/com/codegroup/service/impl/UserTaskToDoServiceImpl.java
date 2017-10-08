@@ -24,6 +24,11 @@ public class UserTaskToDoServiceImpl implements UserTaskToDoService {
     }
 
     @Override
+    public UserTaskToDo oneTask(String name) {
+        return taskDAO.findTaskByTaskName(name);
+    }
+
+    @Override
     public List<UserTaskToDo> findAllTasks() {
         return taskDAO.findAll();
     }

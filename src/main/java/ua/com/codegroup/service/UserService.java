@@ -1,6 +1,7 @@
 package ua.com.codegroup.service;
 
 import org.springframework.stereotype.Service;
+import ua.com.codegroup.entity.Authority;
 import ua.com.codegroup.entity.User;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public interface UserService {
     void delete(int id);
 
     User findByName (String username);
+
+    void updateAuthority(int id, Authority auth);
+
+
 
 
 }

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.com.codegroup.dao.UserDAO;
+import ua.com.codegroup.entity.Authority;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.service.UserService;
 
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     public void save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userDAO.save(user);
     }
 
@@ -43,6 +45,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User findByName(String username) {
         User user = userDAO.findByUsername(username);
         return user;
+    }
+
+    @Override
+    public void updateAuthority(int id, Authority auth) {
+        userDAO.updateAuthority(id, auth);
     }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

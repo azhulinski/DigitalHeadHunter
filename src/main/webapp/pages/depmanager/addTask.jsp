@@ -21,6 +21,12 @@
                 <textarea name="taskBody" placeholder="input task here" cols="40" rows="4"></textarea>
             </td>
         </tr>
+
+        <tr>
+            <td>
+                <input type="date" placeholder="date expired" name="endDate">
+            </td>
+        </tr>
         <tr>
             <td>
                 <input type="submit">

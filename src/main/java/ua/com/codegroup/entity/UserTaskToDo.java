@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "task")
 public class UserTaskToDo {
 
@@ -21,14 +22,15 @@ public class UserTaskToDo {
 
     private String taskName;
     private String taskBody;
+
     private boolean isCompleted;
+    private boolean isConfirmed;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
-
 
 }

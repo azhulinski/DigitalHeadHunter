@@ -8,6 +8,7 @@
     </c:forEach>
 </ul>
 <table>
+
     <tr>
         <td><a href="/depmanager/main">to main manager page</a></td>
     </tr>

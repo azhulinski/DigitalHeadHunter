@@ -44,6 +44,9 @@ public class ChangeUserPasswordController {
         user.setPasswordDefault(false);
 
         userService.save(user);
+
+        //logout after password has been changed
+
         authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null) {

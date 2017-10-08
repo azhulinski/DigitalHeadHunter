@@ -32,24 +32,24 @@ public class ViewUserInfoTaskController {
     public String viewUserInfo(@PathVariable("name") String name, Model model) {
 
         User user = userService.findByName(name);
+        int id = user.getId();
 
-        UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
+        UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(id);
 
-        List<UserTaskToDo> userTaskToDo = userTaskToDoService.findTaskByUserId(user.getId());
-
-        for(UserTaskToDo u : userTaskToDo) {
-            System.out.println(u);
-        }
+        List<UserTaskToDo> userTaskToDo = userTaskToDoService.findTaskByUserId(id);
 
         model.addAttribute("user", user);
 
-        Date date = userDetailedInfo.getDateOfBirth();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String outputDate = simpleDateFormat.format(date);
+        if (userDetailedInfo != null) {
+            Date date = userDetailedInfo.getDateOfBirth();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String outputDate = simpleDateFormat.format(date);
+            model.addAttribute("dateOfBirth", outputDate);
+
 
         model.addAttribute("firstName", userDetailedInfo.getFirstName());
         model.addAttribute("lastName", userDetailedInfo.getLastName());
-        model.addAttribute("dateOfBirth", outputDate);
+        }
 
         return "/depmanager/viewuserinfo";
     }
