@@ -17,8 +17,7 @@ public class DeleteDepartmentController {
 
         departmentService.delete(id);
 
-
-        return "redirect:/";
+        return "/";
     }
 
 }

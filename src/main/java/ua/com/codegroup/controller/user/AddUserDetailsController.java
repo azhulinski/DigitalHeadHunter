@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.entity.UserDetailedInfo;
 import ua.com.codegroup.service.Editors.UserEditor;
@@ -67,13 +68,13 @@ public class AddUserDetailsController {
 
     @PostMapping("/user/addUserDetails")
     public String addUserDetails(@ModelAttribute("addUserInfo") @Validated UserDetailedInfo userDetailedInfo,
-                                 BindingResult bindingResult) {
+                                 BindingResult bindingResult/*,
+                                 @RequestParam MultipartFile picture*/) {
 
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors().toString());
             return "/user/addUserDetails";
         }
-
         userDetailedInfoService.save(userDetailedInfo);
 
         return "/user/tmp/success";

@@ -11,6 +11,7 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+
 @Configuration
 public class WebInit implements WebApplicationInitializer {
 
@@ -26,7 +27,7 @@ public class WebInit implements WebApplicationInitializer {
         registration.setLoadOnStartup(1);
         registration.addMapping("/");
         registration.setMultipartConfig(new MultipartConfigElement(
-                null,
+                "",
                 10000000,
                 10000000,
                 10000000)

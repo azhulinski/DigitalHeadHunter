@@ -18,7 +18,4 @@ public interface DepartmentService {
 
     Department findDepartmentByName (String name);
 
-    //Department findDepartmentByUserForeignKey(int id);
-
-
 }

@@ -4,7 +4,7 @@
 
 <body>
 <h3>${userName}</h3>
-<form action="/user/updateUserDetails/" method="post" modelAttribute="userDetailedInfo">
+<form action="/user/updateUserDetails/" method="post" modelAttribute="userDetailedInfo" enctype="multipart/form-data">
     <table>
         <tr>
             <td>
@@ -31,6 +31,11 @@
                 <input type="date" path="dateOfBirth" placeholder="dateOfBirth" name="dateOfBirth">
 
             </td>
+        <tr>
+            <td>
+            <input type="file" name="avatar">
+            </td>
+        </tr>
         </tr>
         <tr>
             <td><select id="gender" name="gender">
@@ -51,7 +56,9 @@
         <tr>
             <td></td>
             <td><input type="submit" value="update info"></td>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden"
+                   name="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
         </tr>
     </table>
 </form>

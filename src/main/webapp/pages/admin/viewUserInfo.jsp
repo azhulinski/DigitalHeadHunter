@@ -43,6 +43,7 @@
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <tr>
             <td>
+
                 <a href="/admin/${user.username}-changeAuthorities">
                     <input type="button" value="change authorities"></a>
             </td>
@@ -53,6 +54,16 @@
                     <input type="hidden" value="${userId}" name="userId">
                     <input type="submit" name="" value="reset password">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/admin/deleteUser" method="post">
+                    <input type="hidden" value="${user.id}" name="userId">
+                    <input type="submit" name="" value="delete user">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                 </form>
             </td>
         </tr>

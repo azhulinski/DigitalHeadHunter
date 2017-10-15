@@ -16,7 +16,7 @@
     <tr>
         <td>
             <form action="/admin/deleteDepartment" method="post">
-                <input type="hidden" value="${department.id}" name="id">
+                <input type="text" value="${department.id}" name="id">
                 <input type="submit" name="" value="delete department">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>

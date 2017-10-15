@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.entity.UserDetailedInfo;
 import ua.com.codegroup.service.Editors.UserEditor;
 import ua.com.codegroup.service.UserDetailedInfoService;
 import ua.com.codegroup.service.UserService;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.util.Date;
@@ -63,7 +66,11 @@ public class UpdateUserDetailsController {
                                     @RequestParam String lastName,
                                     @RequestParam String dateOfBirth,
                                     @RequestParam String gender,
-                                    @RequestParam Boolean married) throws ParseException {
+                                    @RequestParam Boolean married,
+                                    @RequestParam MultipartFile avatar) throws ParseException, IOException {
+
+        String path = System.getProperty("user.home") + File.separator + "images" + File.separator;
+        avatar.transferTo(new File(path + avatar.getOriginalFilename()));
 
         LocalDate localDate = LocalDate.parse(dateOfBirth);
 

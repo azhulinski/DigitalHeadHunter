@@ -27,6 +27,7 @@ public class UserMainController {
         } else {
             model.addAttribute("user", user.getUsername());
             model.addAttribute("userId", user.getId());
+            model.addAttribute("avatar", user.getAvatar());
             return "/user/main";
         }
     }

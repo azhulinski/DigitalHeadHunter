@@ -38,6 +38,7 @@ public class AdminMainPageController {
         Department one = departmentService.findDepartmentByName(name);
 
         model.addAttribute("department", one);
+
         return "/admin/viewDepartment";
     }
 

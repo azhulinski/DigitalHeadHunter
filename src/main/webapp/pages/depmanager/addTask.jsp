@@ -24,8 +24,9 @@
 
         <tr>
             <td>
-                <input type="date" placeholder="date expired" name="endDate">
+                <input type="date" placeholder="" name="endDate">
             </td>
+
         </tr>
         <tr>
             <td>

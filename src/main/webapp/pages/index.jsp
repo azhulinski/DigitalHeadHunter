@@ -37,8 +37,8 @@
             <td>
                 <a href="user/main">user main page</a>
             </td>
-
         </tr>
+
     </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">

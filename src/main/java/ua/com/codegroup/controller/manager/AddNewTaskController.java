@@ -17,7 +17,7 @@ import ua.com.codegroup.service.UserTaskToDoService;
 import java.util.Date;
 
 @Controller
-public class addNewTaskController {
+public class AddNewTaskController {
 
     @Autowired
     DepartmentService departmentService;

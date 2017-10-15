@@ -2,31 +2,29 @@ package ua.com.codegroup.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.com.codegroup.entity.User;
+import ua.com.codegroup.service.UserDetailedInfoService;
 import ua.com.codegroup.service.UserService;
 
 @Controller
-public class ResetUserPasswordController {
+public class DeleteUserController {
 
     @Autowired
     UserService userService;
 
-    @PostMapping("/admin/resetPassword")
-    public String resetUserPassword(@RequestParam int userId) {
+    @Autowired
+    UserDetailedInfoService userDetailedInfoService;
 
-        User user = userService.findOne(userId);
+    @PostMapping("/admin/deleteUser")
+    public String deleteUser(@RequestParam("userId") int id) {
 
-        String newPassword = "11111";
+        userService.delete(id);
 
-        user.setPassword(newPassword);
 
-        user.setPasswordDefault(true);
-
-        userService.save(user);
-
-        return "/";
+        return "redirect:/";
     }
 
 }

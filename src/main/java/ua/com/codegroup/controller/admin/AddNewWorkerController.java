@@ -15,6 +15,8 @@ import ua.com.codegroup.service.DepartmentService;
 import ua.com.codegroup.service.Editors.DepartmentEditor;
 import ua.com.codegroup.service.UserService;
 
+import java.io.File;
+
 @Controller
 public class AddNewWorkerController {
 
@@ -33,6 +35,7 @@ public class AddNewWorkerController {
         model.addAttribute("saveNewUser", new User());
         model.addAttribute("departments", departmentService.findAll());
 
+
         return "/admin/newWorker";
     }
 
@@ -49,6 +52,8 @@ public class AddNewWorkerController {
             return "/admin/newWorker";
 
         }
+
+        user.setAvatar("/img/man.png");
 
         userService.save(user);
 

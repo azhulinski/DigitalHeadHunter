@@ -10,7 +10,6 @@ import ua.com.codegroup.entity.UserDetailedInfo;
 import ua.com.codegroup.service.UserDetailedInfoService;
 import ua.com.codegroup.service.UserService;
 
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,12 +22,9 @@ public class ViewUserDetailsController {
     @Autowired
     UserDetailedInfoService userDetailedInfoService;
 
-    @GetMapping("/user/{name}")
+    @GetMapping("/user/{name}-info")
     public String viewUserDetails(@PathVariable("name") String name, Model model) {
         User user = userService.findByName(name);
-
-        System.out.println(name);
-
 
         UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(user.getId());
 
