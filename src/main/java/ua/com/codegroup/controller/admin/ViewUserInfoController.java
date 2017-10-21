@@ -42,12 +42,14 @@ public class ViewUserInfoController {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
             String outputDate = simpleDateFormat.format(date);
 
+            model.addAttribute("authorities", user.getAuthority());
             model.addAttribute("firstName", userDetailedInfo.getFirstName());
             model.addAttribute("lastName", userDetailedInfo.getLastName());
             model.addAttribute("dateOfBirth", outputDate);
             model.addAttribute("gender", userDetailedInfo.getGender());
             model.addAttribute("married", userDetailedInfo.isMarried());
             model.addAttribute("userId", user.getId());
+            model.addAttribute("avatar", user.getAvatar());
 
             return "admin/viewUserInfo";
         }

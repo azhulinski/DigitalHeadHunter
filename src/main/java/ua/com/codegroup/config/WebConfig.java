@@ -55,5 +55,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry
                 .addResourceHandler("/js/**")
                 .addResourceLocations("/script/");
+
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
+        registry
+                .addResourceHandler("/vendor/**")
+                .addResourceLocations("/vendor/");
     }
 }

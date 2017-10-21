@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import ua.com.codegroup.entity.User;
+import ua.com.codegroup.entity.UserTaskToDo;
 import ua.com.codegroup.service.UserDetailedInfoService;
 import ua.com.codegroup.service.UserService;
 import ua.com.codegroup.service.UserTaskToDoService;
@@ -36,7 +37,12 @@ public class ShowUserTasksController {
     }
 
     @GetMapping("/user/{taskName}-detail")
-    public String viewTask(@PathVariable("taskName") String taskName) {
+    public String viewTask(@PathVariable("taskName") String taskName, Model model) {
+
+        UserTaskToDo userTaskToDo = userTaskToDoService.oneTask(taskName);
+
+        model.addAttribute("task", userTaskToDo);
+        model.addAttribute("completed", userTaskToDo.isCompleted());
 
 
         return "user/viewTask";

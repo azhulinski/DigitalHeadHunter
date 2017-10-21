@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDAO.updateAuthority(id, auth);
     }
 
+    @Override
+    public void updateAvatar(int id, String avatar) {
+        userDAO.updateAvatar(id, avatar);
+    }
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return findByName(username);
     }

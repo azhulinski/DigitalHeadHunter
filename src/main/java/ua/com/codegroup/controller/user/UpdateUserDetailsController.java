@@ -88,6 +88,7 @@ public class UpdateUserDetailsController {
                 .married(married)
                 .user(user)
                 .build();
+        userService.updateAvatar(user.getId(), "/img/" + avatar.getOriginalFilename());
         userDetailedInfoService.save(userDetailedInfo);
         return "/user/tmp/success";
     }

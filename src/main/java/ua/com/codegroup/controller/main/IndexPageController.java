@@ -1,6 +1,8 @@
 package ua.com.codegroup.controller.main;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,11 +12,15 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ua.com.codegroup.Greeting;
+import ua.com.codegroup.HelloMessage;
 import ua.com.codegroup.entity.User;
+import ua.com.codegroup.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -23,18 +29,10 @@ import java.util.Locale;
 public class IndexPageController {
 
     @Autowired
-    UserDetailsService userDetailsService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    UserService userService;
 
     @GetMapping("/")
     public String index(Locale locale, Model model) {
-
-        /*User asd = (User) userDetailsService.loadUserByUsername("qwe");
-        String password = asd.getPassword();
-        System.out.println(passwordEncoder.matches("qwe", asd.getPassword()));
-        System.out.println(asd.getPassword().equals("qwe"));*/
 
         locale = new Locale("en", "US");
         Date date = new Date();
@@ -43,6 +41,19 @@ public class IndexPageController {
         model.addAttribute("serverTime", formattedDate);
 
         return "index";
+    }
+
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public Greeting greeting(HelloMessage helloMessage, Principal principal) {
+        User user = userService.findByName(principal.getName());
+
+        return new Greeting(user.getUsername() + ": " + helloMessage.getName());
+    }
+
+    @GetMapping("/user/chat")
+    public String chat() {
+        return "/user/chat";
     }
 
     @GetMapping("/logout")
@@ -57,6 +68,5 @@ public class IndexPageController {
         session.invalidate();
         return "/";
     }
-
 
 }

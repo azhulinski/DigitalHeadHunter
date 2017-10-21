@@ -21,6 +21,8 @@ public interface UserService {
 
     void updateAuthority(int id, Authority auth);
 
+    void updateAvatar(int id, String avatar);
+
 
 
 
