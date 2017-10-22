@@ -8,12 +8,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>user information</title>
+    <script src="resources/sockjs.js"></script>
+    <script src="resources/stomp.js"></script>
+    <title>corporate chat</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <style>
+        textarea {
+            resize: none;
+        }
 
         body {
             background: silver;
@@ -72,7 +77,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <h5 class="navbar-brand">${user.username}</h5>
+            <h5 class="navbar-brand">main chat room</h5>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
 
@@ -89,51 +94,76 @@
             <p><a href="/">to index page</a></p>
             <p><a href="/depmanager/main">main manager page</a></p>
             <hr>
-            <a href="/depmanager/${user.username}-viewtasks">
-                <input class="btn btn-primary btn-block" type="button" value="view tasks">
-            </a>
 
         </div>
+
         <div class="col-sm-8 text-left">
-            <h4>${authorities}</h4>
-            <ul class="list-group">
-                <li class="list-group-item">${firstName}</li>
-
-                <li class="list-group-item">${lastName}</li>
-                <hr>
-                <h4>${dateOfBirth}</h4>
-
-
-                <h4>${gender}</h4>
-
-
-                <c:if test="${!married}">
-                    <td>
-                        <h4>not married</h4>
-                    </td>
-                </c:if>
-                <c:if test="${married}">
-                    <td>
-                        <h4>married</h4>
-                    </td>
-                </c:if>
-                </tr>
-            </ul>
-
+            <p id="response"></p>
         </div>
         <div class="col-sm-2 sidenav">
-            <div class="well">
-                <p><img src="${avatar}" alt="avatar" width="80" height="80"></p>
+            <div>
+                <button class="btn btn-primary" id="connect" onclick="connect()">connect</button>
+                <button class="btn btn-primary" id="disconnect" disabled="disabled" onclick="disconnect()">disconnect
+                </button>
             </div>
-
+            <%-- <div class="well">
+                 <p><img src="${avatar}" alt="avatar" width="80" height="80"></p>
+             </div>
+ --%>
         </div>
     </div>
 </div>
 <hr>
 <footer class="container-fluid text-center">
-    <p>Footer Text</p>
+    <div id="conversationDiv">
+        <div class=" col-sm-10 text-left">
+            <input class="form-control" type="text" id="name">
+        </div>
+        <div class=" col-sm-1 text-right">
+            <button class="btn btn-primary" id="send" onclick="send()">send</button>
+        </div>
+    </div>
 </footer>
 
-
 </body>
+<script>
+    var stompClient = null;
+
+    function connect() {
+        var socket = new SockJS('/hello');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            setConnected(true);
+
+            stompClient.subscribe('/topic/greetings', function (greeting) {
+                showGreeting(JSON.parse(greeting.body).content)
+            })
+        })
+    }
+
+    function setConnected(connected) {
+        document.getElementById("connect").disabled = connected;
+        document.getElementById("disconnect").disabled = !connected;
+        document.getElementById("conversationDiv").visibility = connected ? 'visible' : 'hidden';
+        document.getElementById('response').innerHTML = '';
+    }
+
+    function showGreeting(message) {
+        var response = document.getElementById('response');
+        var p = document.createElement('p');
+        p.style.wordWrap = "break-word";
+        p.appendChild(document.createTextNode(message));
+        response.appendChild(p);
+    }
+
+    function disconnect() {
+        stompClient.disconnect();
+        setConnected(false);
+    }
+
+    function send() {
+        var name = document.getElementById("name").value;
+        stompClient.send("/app/hello", {}, JSON.stringify({'name': name}));
+    }
+</script>
 </html>

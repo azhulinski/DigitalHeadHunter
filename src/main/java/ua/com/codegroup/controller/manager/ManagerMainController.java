@@ -25,7 +25,7 @@ public class ManagerMainController {
             return "/user/changePassword";
 
         } else {
-            model.addAttribute("user", user.getUsername());
+            model.addAttribute("user", user);
             model.addAttribute("userId", user.getId());
             return "/depmanager/main";
         }

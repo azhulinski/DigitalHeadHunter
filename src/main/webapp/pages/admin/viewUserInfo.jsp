@@ -71,12 +71,7 @@
             <h5 class="navbar-brand">${user.username}</h5>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <%-- <ul class="nav navbar-nav">
-                 <li class="active"><a href="#">Home</a></li>
-                 <li><a href="#">About</a></li>
-                 <li><a href="#">Projects</a></li>
-                 <li><a href="#">Contact</a></li>
-             </ul>--%>
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
@@ -89,22 +84,24 @@
         <div class="col-sm-2 sidenav">
             <p><a href="/">to index page</a></p>
             <p><a href="/admin/main">main admin page</a></p>
-            <p><a href="/admin/${user.username}-changeAuthorities">change authorities</a></p>
-            <hr>
-            <p>
-            <form action="/admin/resetPassword" method="post">
-                <input type="hidden" value="${userId}" name="userId">
-                <input type="submit" class="btn btn-primary btn-block" name="" value="reset password">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-            </p>
-            <p>
-            <form action="/admin/deleteUser" method="post">
-                <input type="hidden" value="${user.id}" name="userId">
-                <input type="submit" class="btn btn-primary btn-block" name="" value="delete user">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-            </p>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <p><a href="/admin/${user.username}-changeAuthorities">change authorities</a></p>
+                <hr>
+                <p>
+                <form action="/admin/resetPassword" method="post">
+                    <input type="hidden" value="${userId}" name="userId">
+                    <input type="submit" class="btn btn-primary btn-block" name="" value="reset password">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+                </p>
+                <p>
+                <form action="/admin/deleteUser" method="post">
+                    <input type="hidden" value="${user.id}" name="userId">
+                    <input type="submit" class="btn btn-primary btn-block" name="" value="delete user">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+                </p>
+            </sec:authorize>
         </div>
         <div class="col-sm-8 text-left">
             <h4>${authorities}</h4>
@@ -112,23 +109,23 @@
                 <li class="list-group-item">${firstName}</li>
 
                 <li class="list-group-item">${lastName}</li>
-               <hr>
-                        <h4>${dateOfBirth}</h4>
+                <hr>
+                <h4>${dateOfBirth}</h4>
 
 
-                        <h4>${gender}</h4>
+                <h4>${gender}</h4>
 
 
-                    <c:if test="${!married}">
-                        <td>
-                            <h4>not married</h4>
-                        </td>
-                    </c:if>
-                    <c:if test="${married}">
-                        <td>
-                            <h4>married</h4>
-                        </td>
-                    </c:if>
+                <c:if test="${!married}">
+                    <td>
+                        <h4>not married</h4>
+                    </td>
+                </c:if>
+                <c:if test="${married}">
+                    <td>
+                        <h4>married</h4>
+                    </td>
+                </c:if>
                 </tr>
             </ul>
 
@@ -153,7 +150,7 @@
 
 
 
-    <sec:authorize access="hasRole('ROLE_ADMIN')">
+
         <tr>
             <td>
 

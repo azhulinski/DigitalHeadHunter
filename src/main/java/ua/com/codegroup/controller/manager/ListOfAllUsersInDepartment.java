@@ -18,6 +18,7 @@ public class ListOfAllUsersInDepartment {
     public String viewUsers(@PathVariable("name") String name, Model model){
 
         Department department = departmentService.findDepartmentByName(name);
+        model.addAttribute("departments", departmentService.findAll());
 
         model.addAttribute("department", department);
 

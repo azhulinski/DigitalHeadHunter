@@ -24,7 +24,7 @@ public class Department {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL)
     private List<User> user;
 
 

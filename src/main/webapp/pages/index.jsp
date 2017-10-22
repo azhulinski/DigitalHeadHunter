@@ -65,8 +65,30 @@
                 </ul>
             </div>
         </sec:authorize>
+
+        <sec:authorize access="hasRole('ROLE_MANAGER')">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="depmanager/main">Manager Page
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="depmanager/viewAllDepartments">Departments</a>
+                    </li>
+                    <sec:authorize access="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/logout">logOut</a>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </sec:authorize>
     </div>
 </nav>
+
 <!-- Bootstrap core JavaScript -->
 <script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
 <script src="${contextPath}/vendor/popper/popper.min.js"></script>

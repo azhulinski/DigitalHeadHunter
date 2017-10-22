@@ -51,9 +51,9 @@ public class IndexPageController {
         return new Greeting(user.getUsername() + ": " + helloMessage.getName());
     }
 
-    @GetMapping("/user/chat")
+    @GetMapping("/chat")
     public String chat() {
-        return "/user/chat";
+        return "/chat";
     }
 
     @GetMapping("/logout")
