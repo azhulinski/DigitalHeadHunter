@@ -12,6 +12,7 @@ import ua.com.codegroup.service.UserDetailedInfoService;
 import ua.com.codegroup.service.UserService;
 import ua.com.codegroup.service.UserTaskToDoService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,10 +29,14 @@ public class ViewUserTaskController {
 
 
     @GetMapping("/depmanager/{name}-viewtasks")
-    public String viewUserTasksController(@PathVariable("name") String name, Model model) {
+    public String viewUserTasksController(@PathVariable("name") String name, Model model, Principal principal) {
+
+        User manager = userService.findByName(principal.getName());
 
         User user = userService.findByName(name);
 
+        model.addAttribute("manager", manager);
+        model.addAttribute("avatar", manager.getAvatar());
         model.addAttribute("user", user);
 
         return "/depmanager/viewusertasks";
@@ -39,11 +44,20 @@ public class ViewUserTaskController {
 
     @GetMapping("depmanager/{taskname}-details")
     public String viewUsrTaskController(@PathVariable("taskname") String taskname,
-                                        Model model) {
+                                        Model model,
+                                        Principal principal) {
+
+        User manager = userService.findByName(principal.getName());
 
         UserTaskToDo task = userTaskToDoService.oneTask(taskname);
 
+        User user = task.getUser();
+
         UserDetailedInfo userDetailedInfo = userDetailedInfoService.findDetailsByUserId(task.getUser().getId());
+
+        model.addAttribute("manager", manager);
+        model.addAttribute("avatar", manager.getAvatar());
+        model.addAttribute("user", user);
 
         model.addAttribute("userInfo", userDetailedInfo);
 

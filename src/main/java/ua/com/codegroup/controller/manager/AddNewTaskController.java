@@ -14,6 +14,7 @@ import ua.com.codegroup.service.DepartmentService;
 import ua.com.codegroup.service.UserService;
 import ua.com.codegroup.service.UserTaskToDoService;
 
+import java.security.Principal;
 import java.util.Date;
 
 @Controller
@@ -29,8 +30,13 @@ public class AddNewTaskController {
     UserTaskToDoService userTaskToDoService;
 
     @GetMapping("depmanager/listOfAllUsers")
-    public String addNewTask(Model model) {
+    public String addNewTask(Model model,
+                             Principal principal) {
 
+        User manager = userService.findByName(principal.getName());
+
+        model.addAttribute("manager", manager);
+        model.addAttribute("avatar", manager.getAvatar());
         model.addAttribute("users", userService.findAll());
 
 

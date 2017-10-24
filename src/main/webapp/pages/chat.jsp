@@ -116,10 +116,10 @@
 <hr>
 <footer class="container-fluid text-center">
     <div id="conversationDiv">
-        <div class=" col-sm-10 text-left">
+        <div class="col-sm-10 text-left">
             <input class="form-control" type="text" id="name">
         </div>
-        <div class=" col-sm-1 text-right">
+        <div class="col-sm-1 text-right">
             <button class="btn btn-primary" id="send" onclick="send()">send</button>
         </div>
     </div>

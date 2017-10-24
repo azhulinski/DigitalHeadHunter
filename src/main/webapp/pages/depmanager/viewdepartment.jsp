@@ -70,12 +70,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <h5 class="navbar-brand">${department.name}</h5>
+            <img src="${avatar}" alt="avatar" width="72" height="72">
+            <h5 class="navbar-brand">${manager.username}</h5>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <sec:authorize access="isAuthenticated()">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="/logout">
+                        <span class="glyphicon glyphicon-log-out">
+
+                        </span> Logout</a></li>
                 </ul>
             </sec:authorize>
         </div>
@@ -92,14 +96,14 @@
                 <hr>
             </ul>
             <p><a href="/depmanager/listOfAllUsers">view users</a></p>
-            <p><a href="#">chat room</a></p>
+            <p><a href="/chat">chat room</a></p>
             <hr>
             <p><a href="/">index page</a></p>
         </div>
         <div class="col-sm-8 text-left">
 
                 <ul>
-                    <c:forEach items="${department.user}" var="user">
+                    <c:forEach items="${dep.user}" var="user">
                         <li>
                             <h3><a href="${user.username}-info">${user.username}</a></h3>
                         </li>

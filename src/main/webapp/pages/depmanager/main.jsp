@@ -86,7 +86,7 @@
         <div class="col-sm-2 sidenav">
             <p><a href="/depmanager/viewAllDepartments">view departments</a></p>
             <p><a href="/depmanager/listOfAllUsers">view users</a></p>
-            <p><a href="#">chat room</a></p>
+            <p><a href="/chat">chat room</a></p>
             <hr>
             <p><a href="/">index page</a></p>
         </div>
