@@ -105,7 +105,7 @@
             <p><a href="/">index page</a></p>
         </div>
         <div class="col-sm-8 text-left">
-            <h1>tasks ${task.taskName}</h1>
+            <h1>task ${task.taskName}</h1>
             <hr>
             <ul>
 
@@ -123,10 +123,17 @@
 
 
                 </ul>
-                <form action="/depmanager/confirmTask" method="post">
+                <form id="confirmation" action="/depmanager/confirmTask" method="post">
                     <input type="hidden" value="${task.id}" name="taskId">
-                    <input class="btn btn-primary col-sm-4" type="submit" name="" value="confirm completing">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <%--<input
+                            class="btn btn-primary col-sm-4"
+                            type="submit"
+                            name=""
+                            value="confirm completing">--%>
+                    <input
+                            type="hidden"
+                            name="${_csrf.parameterName}"
+                            value="${_csrf.token}"/>
                 </form>
                 <form action="/depmanager/confirmTask" method="post">
                     <input type="hidden" value="${task.id}" name="taskId">
@@ -147,6 +154,25 @@
     <p>Footer Text</p>
 </footer>
 
+<script>
+    if (${task.completed}) {
+
+        var insertButton = document.createElement('input');
+        insertButton.setAttribute('id', 'confirmBtn')
+        insertButton.setAttribute('type', 'submit');
+        insertButton.setAttribute('value', 'confirm task');
+        insertButton.setAttribute('class', 'btn btn-primary col-sm-4')
+        document.getElementById('confirmation').appendChild(insertButton);
+    }
+</script>
+
+<script>
+if(${task.confirmed}) {
+    document.getElementById('confirmBtn').disabled = true;
+} else {
+    document.getElementById('confirmBtn').disabled = false;
+}
+</script>
 </body>
 </html>
 

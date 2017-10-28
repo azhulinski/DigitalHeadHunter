@@ -143,7 +143,7 @@
 
         </div>
         <div class="col-sm-2 sidenav">
-            <img src="${avatar}" alt="avatar" class="widthSet" >
+
         </div>
     </div>
 </div>
