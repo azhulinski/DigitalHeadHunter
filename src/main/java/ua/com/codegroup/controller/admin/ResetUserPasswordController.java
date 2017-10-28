@@ -26,7 +26,7 @@ public class ResetUserPasswordController {
 
         userService.save(user);
 
-        return "/";
+        return "redirect:/";
     }
 
 }

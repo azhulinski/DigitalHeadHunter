@@ -86,6 +86,27 @@
                 </ul>
             </div>
         </sec:authorize>
+
+        <sec:authorize access="hasRole('ROLE_USER')">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="user/main">User Page
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat">Chat</a>
+                    </li>
+                    <sec:authorize access="isAuthenticated()">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/logout">logOut</a>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </li>
+                    </sec:authorize>
+                </ul>
+            </div>
+        </sec:authorize>
     </div>
 </nav>
 

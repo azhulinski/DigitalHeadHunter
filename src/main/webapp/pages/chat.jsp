@@ -65,6 +65,9 @@
                 height: auto;
             }
         }
+        .widthSet {
+            max-width: 205px;
+        }
     </style>
 </head>
 <body>
@@ -92,7 +95,7 @@
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <p><a href="/">to index page</a></p>
-            <p><a href="/depmanager/main">main manager page</a></p>
+            <p></p>
             <hr>
 
         </div>
@@ -102,14 +105,15 @@
         </div>
         <div class="col-sm-2 sidenav">
             <div>
+                <p> <img src="${avatar}" alt="avatar" class="widthSet" ></p>
+            </div>
+            <div>
                 <button class="btn btn-primary" id="connect" onclick="connect()">connect</button>
                 <button class="btn btn-primary" id="disconnect" disabled="disabled" onclick="disconnect()">disconnect
                 </button>
             </div>
-            <%-- <div class="well">
-                 <p><img src="${avatar}" alt="avatar" width="80" height="80"></p>
-             </div>
- --%>
+
+
         </div>
     </div>
 </div>

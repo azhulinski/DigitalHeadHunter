@@ -50,6 +50,7 @@ public class UpdateUserDetailsController {
             model.addAttribute("firstName", userDetailedInfo.getFirstName());
             model.addAttribute("lastName", userDetailedInfo.getLastName());
             model.addAttribute("dateOfBirth", userDetailedInfo.getDateOfBirth());
+            model.addAttribute("avatar", user.getAvatar());
             return "/user/updateUserDetails";
 
         } else {
@@ -57,8 +58,6 @@ public class UpdateUserDetailsController {
         }
 
     }
-
-
     @PostMapping("/user/updateUserDetails")
     public String updateUserDetails(Principal principal,
                                     @RequestParam int detailedInfoId,

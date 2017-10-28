@@ -40,6 +40,7 @@ public class ViewUserDetailsController {
             model.addAttribute("dateOfBirth", outputDate);
             model.addAttribute("gender", userDetailedInfo.getGender());
             model.addAttribute("married", userDetailedInfo.isMarried());
+            model.addAttribute("avatar", user.getAvatar());
 
             return "user/viewUserDetails";
         } else {

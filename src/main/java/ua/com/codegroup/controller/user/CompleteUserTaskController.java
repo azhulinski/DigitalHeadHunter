@@ -22,7 +22,7 @@ public class CompleteUserTaskController {
         userTaskToDo.setCompleted(true);
         userTaskToDoService.save(userTaskToDo);
 
-        return "redirect:/";
+        return "redirect:/user/showTasks";
     }
 
 }

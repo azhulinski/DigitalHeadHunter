@@ -40,8 +40,13 @@
 
         /* Set black background color, white text and some padding */
         footer {
-            background-color: #555;
-            color: grey;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            background-color: #2b2b2b;
+            color: cadetblue;
             padding: 15px;
         }
 
@@ -55,6 +60,14 @@
             .row.content {
                 height: auto;
             }
+        }
+
+        .widthSet {
+            max-width: 205px;
+        }
+
+        .heightSet {
+            max-height: 205px;
         }
     </style>
 </head>
@@ -131,56 +144,16 @@
 
         </div>
         <div class="col-sm-2 sidenav">
-            <div class="well">
-                <p><img src="${avatar}" alt="avatar" width="80" height="80"></p>
-            </div>
+
+                <img src="${avatar}" alt="avatar" class="widthSet" >
+
 
         </div>
     </div>
 </div>
+<footer class="container-fluid text-center">
+    <p>Footer Text</p>
+</footer>
 
 </body>
 </html>
-
-
-<%--
-
-<body>
-<h3></h3>
-
-
-
-
-        <tr>
-            <td>
-
-                <a href="/admin/${user.username}-changeAuthorities">
-                    <input type="button" value="change authorities"></a>
-            </td>
-        <tr/>
-        <tr>
-            <td>
-                <form action="/admin/resetPassword" method="post">
-                    <input type="hidden" value="${userId}" name="userId">
-                    <input type="submit" name="" value="reset password">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form action="/admin/deleteUser" method="post">
-                    <input type="hidden" value="${user.id}" name="userId">
-                    <input type="submit" name="" value="delete user">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-                </form>
-            </td>
-        </tr>
-    </sec:authorize>
-
-</table>
-
-</body>
-</html>
---%>
