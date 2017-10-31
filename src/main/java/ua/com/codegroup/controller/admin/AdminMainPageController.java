@@ -36,7 +36,13 @@ public class AdminMainPageController {
     @GetMapping("/admin/{name}")
     public String showDepartment(@PathVariable("name") String name, Model model) {
         model.addAttribute("departments", departmentService.findAll());
+
+
         Department one = departmentService.findDepartmentByName(name);
+        if(one == null) {
+            one = departmentService.findDepartmentWithoutUsers(name);
+        }
+        System.out.println(one);
         model.addAttribute("dep", one);
 
         return "/admin/viewDepartment";

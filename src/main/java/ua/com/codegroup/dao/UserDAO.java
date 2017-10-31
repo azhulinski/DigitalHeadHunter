@@ -15,9 +15,6 @@ public interface UserDAO extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.username =:username")
     User findByUsername(@Param("username") String username);
 
-    /*@Query("select d from User u join u.department as d where u.department.id=:id")
-    Department depsFromUser(@Param("id") int id);*/
-
     @Modifying
     @Query("update User set authority=:auth where id=:id ")
     void updateAuthority(@Param("id") int id, @Param("auth") Authority auth);

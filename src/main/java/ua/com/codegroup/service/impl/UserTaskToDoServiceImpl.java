@@ -42,4 +42,9 @@ public class UserTaskToDoServiceImpl implements UserTaskToDoService {
     public List<UserTaskToDo> findTaskByUserId(int id) {
         return taskDAO.findTaskByUserId(id);
     }
+
+    @Override
+    public void delete(int id) {
+        taskDAO.delete(id);
+    }
 }

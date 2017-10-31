@@ -17,9 +17,6 @@ public class ConfirmTaskCompletingController {
 
     @PostMapping("/depmanager/confirmTask")
     public String confirmTask(@RequestParam("taskId") int id) {
-
-
-
         UserTaskToDo userTaskToDo = taskToDoService.findOne(id);
 
         userTaskToDo.setConfirmed(true);

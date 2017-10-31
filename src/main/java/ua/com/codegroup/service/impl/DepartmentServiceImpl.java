@@ -39,4 +39,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departmentDAO.findDepartmentByName(name);
     }
 
+    @Override
+    public Department findDepartmentWithoutUsers(String name) {
+        return departmentDAO.findDepartmentWithoutUsers(name);
+    }
+
 }

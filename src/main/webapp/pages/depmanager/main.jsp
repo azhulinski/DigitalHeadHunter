@@ -74,7 +74,10 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <sec:authorize access="isAuthenticated()">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+                        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
                 </ul>
             </sec:authorize>
         </div>

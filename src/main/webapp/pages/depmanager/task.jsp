@@ -125,17 +125,13 @@
                 </ul>
                 <form id="confirmation" action="/depmanager/confirmTask" method="post">
                     <input type="hidden" value="${task.id}" name="taskId">
-                    <%--<input
-                            class="btn btn-primary col-sm-4"
-                            type="submit"
-                            name=""
-                            value="confirm completing">--%>
+
                     <input
                             type="hidden"
                             name="${_csrf.parameterName}"
                             value="${_csrf.token}"/>
                 </form>
-                <form action="/depmanager/confirmTask" method="post">
+                <form action="/depmanager/deleteTask" method="post">
                     <input type="hidden" value="${task.id}" name="taskId">
                     <input class="btn btn-warning col-sm-4 text-right" type="submit" name="" value="delete task">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

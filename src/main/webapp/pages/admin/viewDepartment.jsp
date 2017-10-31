@@ -9,7 +9,7 @@
 <html lang="en">
 <head>
 
-    <title>main admin page</title>
+    <title>view users in department</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

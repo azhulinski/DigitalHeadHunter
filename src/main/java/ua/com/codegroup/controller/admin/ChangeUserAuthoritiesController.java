@@ -39,11 +39,6 @@ public class ChangeUserAuthoritiesController {
     public String changeUserAuthorities(@RequestParam int userId,
                                         @RequestParam Authority authority) {
 
-        /*User user = userService.findOne(userId);
-
-        user.setAuthority(authority);
-
-        userService.save(user);*/
 
         userService.updateAuthority(userId, authority);
         return "redirect:/";

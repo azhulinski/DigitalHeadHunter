@@ -18,4 +18,6 @@ public interface DepartmentService {
 
     Department findDepartmentByName (String name);
 
+    Department findDepartmentWithoutUsers(String name);
+
 }

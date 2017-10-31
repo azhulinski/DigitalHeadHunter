@@ -74,6 +74,10 @@ public class UpdateUserDetailsController {
         LocalDate localDate = LocalDate.parse(dateOfBirth);
 
         Date birthDate = localDate.toDate();
+        if(birthDate == null) {
+            birthDate = userDetailedInfoService
+                    .findDetailsByUserId((userService.findByName(principal.getName())).getId()).getDateOfBirth();
+        }
 
         User user = userService.findByName(principal.getName());
 

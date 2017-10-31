@@ -218,6 +218,7 @@
 </html>
 
 
+<%--
 <form action="/user/addUserDetails" method="post" >
     <table>
         <tr>
@@ -269,4 +270,4 @@
 </form>
 
 </body>
-</html>
+</html>--%>

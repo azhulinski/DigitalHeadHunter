@@ -20,4 +20,6 @@ public interface UserTaskToDoService {
 
     List<UserTaskToDo> findTaskByUserId(int id);
 
+    void delete(int id);
+
 }

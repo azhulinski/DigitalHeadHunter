@@ -68,8 +68,7 @@ public class AddUserDetailsController {
 
     @PostMapping("/user/addUserDetails")
     public String addUserDetails(@ModelAttribute("addUserInfo") @Validated UserDetailedInfo userDetailedInfo,
-                                 BindingResult bindingResult/*,
-                                 @RequestParam MultipartFile picture*/) {
+                                 BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors().toString());
