@@ -74,8 +74,8 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <img src="${avatar}" alt="avatar" width="72" height="72">
-            <h5 class="navbar-brand">${manager.username}</h5>
+
+            <h5 class="navbar-brand">${user.username}</h5>
 
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">

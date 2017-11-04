@@ -15,10 +15,12 @@ public class UserMainController {
     @Autowired
     UserService userService;
 
+
     @GetMapping("/user/main")
     public String mainUserPage(Model model, Principal principal) {
 
         User user = userService.findByName(principal.getName());
+        //System.out.println(System.getProperty("user.dir"));
 
         if (user.isPasswordDefault()) {
             model.addAttribute("userId", user.getId());
