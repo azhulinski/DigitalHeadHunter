@@ -100,15 +100,13 @@
         <div class="col-sm-8 text-left">
             <%--<h1>all tasks for ${userInfo.firstName} ${userInfo.lastName}</h1>--%>
 
-            <ul>
-                <c:forEach items="${users}" var="user">
-
-                    <li><a href="${user.username}-task">${user.username}</a></li>
-
-
-                </c:forEach>
-
-            </ul>
+                <ul>
+                    <c:forEach items="${department.user}" var="user">
+                        <li>
+                            <h3><a href="${user.username}-task">${user.username}</a></h3>
+                        </li>
+                    </c:forEach>
+                </ul>
 
         </div>
         <div class="col-sm-2 sidenav">

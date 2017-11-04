@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.com.codegroup.entity.Department;
 import ua.com.codegroup.entity.User;
 import ua.com.codegroup.entity.UserTaskToDo;
 import ua.com.codegroup.service.DepartmentService;
@@ -35,9 +36,12 @@ public class AddNewTaskController {
 
         User manager = userService.findByName(principal.getName());
 
+        Department department = manager.getDepartment();
+
         model.addAttribute("manager", manager);
         model.addAttribute("avatar", manager.getAvatar());
         model.addAttribute("users", userService.findAll());
+        model.addAttribute("department", department);
 
 
         return "depmanager/listOfAllUsers";
