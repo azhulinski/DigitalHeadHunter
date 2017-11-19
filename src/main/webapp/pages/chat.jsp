@@ -65,6 +65,7 @@
                 height: auto;
             }
         }
+
         .widthSet {
             max-width: 205px;
         }
@@ -105,7 +106,7 @@
         </div>
         <div class="col-sm-2 sidenav">
             <div>
-                <p> <img src="${avatar}" alt="avatar" class="widthSet" ></p>
+                <p><img src="${avatar}" alt="avatar" class="widthSet"></p>
             </div>
             <div>
                 <button class="btn btn-primary" id="connect" onclick="connect()">connect</button>
@@ -121,7 +122,7 @@
 <footer class="container-fluid text-center">
     <div id="conversationDiv">
         <div class="col-sm-10 text-left">
-            <input class="form-control" type="text" id="name">
+            <input class="form-control" type="text" autocomplete="off" id="name">
         </div>
         <div class="col-sm-1 text-right">
             <button class="btn btn-primary" id="send" onclick="send()">send</button>
@@ -158,6 +159,7 @@
         p.style.wordWrap = "break-word";
         p.appendChild(document.createTextNode(message));
         response.appendChild(p);
+        document.getElementById('name').value = '';
     }
 
     function disconnect() {
